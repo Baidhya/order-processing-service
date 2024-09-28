@@ -1,0 +1,29 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: order-processing-service
+
+  datasource:
+    hikari:
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: update
+  config:
+    import: "configserver:"  # Required Config Server
+  cloud:
+    config:
+      uri: http://localHost:8888
+      enabled: true
+  kafka:
+    bootstrap-servers: localhost:9092  # Fallback value
+    consumer:
+      group-id: order-processing-group
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+

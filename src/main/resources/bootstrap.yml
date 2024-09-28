@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: order-processing-service
+  cloud:
+    config:
+      uri: http://localHost:8888  # The address of your Config Server
+      fail-fast: true  # Fail to start if the Config Server is unreachable
