@@ -18,8 +18,17 @@ spring:
       enabled: true
   kafka:
     bootstrap-servers: localhost:9092  # Fallback value
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
-      group-id: order-processing-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: order-group
+      properties:
+        spring.json.trusted.packages: '*'  # Allow deserialization of custom objects
+        listener:
+          missing-topics-fatal: false  # Avoid failure when a topic doesn't exist
 
 springdoc:
   api-docs:
